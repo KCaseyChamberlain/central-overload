@@ -23,10 +23,10 @@ weather.textContent = "Weather";
 function getWeather() {
   var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=84020,us&appid=32ed05888dd11ce89460365fde5e625e';
   fetch(weatherUrl)
-    .then(function(response) {
+    .then(response => {
       return response.json();
     })
-    .then(function(data) {
+    .then(data => {
       console.log(data);
       console.log(data.name);
       console.log(data.main.temp/10);
@@ -186,7 +186,7 @@ news8Text.setAttribute('target', '_blank');
 news8Text.className = 'title tile is-child';
 // News 8 ends.
 function getNews() {
-  fetch("https://free-news.p.rapidapi.com/v1/search?q=bitcoin&lang=en", {
+  fetch("https://free-news.p.rapidapi.com/v1/search?q=iran&lang=en", {
 	  "method": "GET",
 	  "headers": {
 		  "x-rapidapi-host": "free-news.p.rapidapi.com",
