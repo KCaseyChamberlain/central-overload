@@ -34,6 +34,33 @@ function getWeather() {
 };
 // Weather section ends here.
 // News section starts here.
+const search = document.createElement('div');
+center.appendChild(search);
+search.className ='tile is-parent box';
+search.id = 'search';
+const searchInput = document.createElement('input');
+search.appendChild(searchInput);
+searchInput.className ='tile is-child is-9';
+searchInput.id = 'searchInput';
+searchInput.setAttribute('placeholder', "Type News Topic You Like!");
+const searchButton = document.createElement('button');
+search.appendChild(searchButton);
+searchButton.className ='tile is-child is-3';
+searchButton.id = 'searchButton';
+searchButton.textContent = "Search";
+var topic = localStorage.getItem('keytopic');
+if (topic == "" || topic == null) {
+  localStorage.setItem('keytopic', "Breaking News");
+}
+searchButton.addEventListener('click', function() {
+  var newsSearch = searchInput.value;
+  if (newsSearch == "" || newsSearch == null) {
+    newsSearch = localStorage.getItem('keytopic');
+  }
+  localStorage.setItem('keytopic', newsSearch);
+  var topic = localStorage.getItem('keytopic');
+  getNews();
+});
 const news = document.createElement('div');
 center.appendChild(news);
 news.id = 'news';
@@ -186,7 +213,8 @@ news8Text.setAttribute('target', '_blank');
 news8Text.className = 'title tile is-child';
 // News 8 ends.
 function getNews() {
-  fetch("https://free-news.p.rapidapi.com/v1/search?q=iran&lang=en", {
+  var topic = localStorage.getItem('keytopic');
+  fetch("https://free-news.p.rapidapi.com/v1/search?q="+topic+"&lang=en", {
 	  "method": "GET",
 	  "headers": {
 		  "x-rapidapi-host": "free-news.p.rapidapi.com",
@@ -197,8 +225,6 @@ function getNews() {
     return response.json();
   })
   .then(data => {
-    console.log(data);
-
     news0Image.setAttribute('src', data.articles[0].media);
     news0Source.textContent = data.articles[0].clean_url;
     news0Text.textContent = data.articles[0].title;

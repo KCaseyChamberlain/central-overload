@@ -1,12 +1,17 @@
 // Header starts here.
 const header = document.querySelector('#header');
+const day = document.querySelector('#day');
 const time = document.querySelector('#time');
 // this code block does two thing, it first shows the current date and time then refreshes the time every second so our time display line stays updated.
-var now = moment().format('dddd MMMM Do YYYY, h:mm:ss a');
-time.textContent = now;
+var nowDay = moment().format('dddd MMMM Do YYYY');
+var nowTime = moment().format('h:mm:ss a');
+day.textContent = nowDay;
+time.textContent = nowTime;
 setInterval(function() {
-  now = moment().format('dddd MMMM Do YYYY, h:mm:ss a');
-  time.textContent = now;
+  var nowDay = moment().format('dddd MMMM Do YYYY');
+  var nowTime = moment().format('h:mm:ss a');
+  day.textContent = nowDay;
+  time.textContent = nowTime;
 }, 1000);
 // Header ends here.
 // Main starts here.
