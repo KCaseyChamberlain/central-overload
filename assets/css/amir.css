@@ -1,0 +1,15 @@
+@media screen and (max-width: 768px) {
+  #searchInput, #searchButton {
+    width: 100%;
+  }
+}
+#searchInput, #searchButton {
+  margin: 2px !important;
+  font-size: 1.25rem;
+}
+#searchButton {
+  margin: 1px !important;
+  font-family: 'Bangers', cursive;
+  background-color: var(--primary);
+  color: var(--secondary);
+}
