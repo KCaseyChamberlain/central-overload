@@ -3,12 +3,15 @@
     width: 100%;
   }
 }
+#search {
+  padding: 10px;
+}
 #searchInput, #searchButton {
+  padding: 5px;
   margin: 2px !important;
   font-size: 1.25rem;
 }
 #searchButton {
-  margin: 1px !important;
   font-family: 'Bangers', cursive;
   background-color: var(--primary);
   color: var(--secondary);

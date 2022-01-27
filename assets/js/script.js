@@ -35,3 +35,36 @@ right.id = 'right';
 right.className = 'tile is-parent is-2 box';
 right.textContent = "Right";
 // Main ends here.
+// Here we get user's IP address so we can find user's location.
+function user() {
+  fetch('https://api.ipify.org/?format=json')
+    .then(results => {
+      return results.json();
+    })
+    .then(data => {
+      userLocation(data.ip);
+    })
+    .catch(err => {
+      console.error(err);
+    })
+  };
+  // Here we use user's IP address to find user's location.
+  function userLocation(ip) {
+    fetch("https://weatherapi-com.p.rapidapi.com/ip.json?q="+ip, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+        "x-rapidapi-key": "12b796900dmsh12b8fa6011f391ep1d4f63jsnff6a49444565"
+      }
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+    getForecast(data.city);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+};
+user()
