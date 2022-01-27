@@ -1,38 +1,3 @@
-// Check to see if page is a secure context so service workers are available to get the current location.
-if (window.isSecureContext) {
-  navigator.serviceWorker.register("/offline-worker.js")
-  .then(function () {
-    const successCallback = (position) => {
-      console.log(position);
-    };
-    const errorCallback = (error) => {
-      console.error(error);
-    };
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  });
-} else {
-  console.log("Page is not Secure!")
-};
-// Weather section starts here.
-const weather = document.createElement('div');
-center.appendChild(weather);
-weather.id = 'weather';
-weather.className = 'tile is-parent is-12 box';
-weather.textContent = "Weather";
-
-function getWeather() {
-  var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=84020,us&appid=32ed05888dd11ce89460365fde5e625e';
-  fetch(weatherUrl)
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-      console.log(data.name);
-      console.log(data.main.temp/10);
-    });
-};
-// Weather section ends here.
 // News section starts here.
 const search = document.createElement('div');
 center.appendChild(search);
@@ -274,5 +239,4 @@ function getNews() {
 	  console.error(err);
 })};
 // News section ends here.
-getWeather();
 getNews();
