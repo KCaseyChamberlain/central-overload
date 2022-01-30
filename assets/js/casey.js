@@ -2,14 +2,34 @@
 const weather = document.createElement('div');
 center.appendChild(weather);
 weather.id = 'weather';
-weather.className = 'tile is-parent is-12 box text-center';
+weather.className = 'is-12 box text-center ';
 weather.textContent = "Weather";
 
-const weatherIconDiv = document.createElement('div');
-weather.appendChild(weatherIconDiv);
-weatherIconDiv.id = "weather-icon-div";
-weatherIconDiv.className = 'tile is-parent is-12 box text-center';
-weatherIconDiv.textContent = "weatherIconDiv has been created!";
+const weatherCountry = document.createElement('div');
+weather.appendChild(weatherCountry);
+weatherCountry.id = "weather-country";
+weatherCountry.className = 'is-12 box text-center';
+weatherCountry.textContent = "weatherCountry has been created!";
+
+const weatherLocation = document.createElement('div');
+weather.appendChild(weatherLocation);
+weatherLocation.id = "weather-location";
+weatherLocation.className = 'is-12 box text-center';
+weatherLocation.textContent = "weatherLocation has been created!";
+
+const weatherIcon = document.createElement('div');
+weather.appendChild(weatherIcon);
+weatherIcon.id = "weather-icon";
+weatherIcon.className = 'is-12 box text-center';
+weatherIcon.textContent = "weatherIcon has been created!";
+
+const weatherTemp = document.createElement('div');
+weather.appendChild(weatherTemp);
+weatherTemp.id = "weather-country";
+weatherTemp.className = 'is-12 box text-center';
+weatherTemp.textContent = "weatherTemp has been created!";
+
+
 
 
   function getWeather() {
@@ -30,13 +50,13 @@ weatherIconDiv.textContent = "weatherIconDiv has been created!";
     console.log(data.current.condition.icon)
     console.log(data.current.temp_f);
 
-    var weatherCountry = data.location.country
-    var weatherLocation = data.location.name
-    var weatherConditionIcon = data.current.condition.icon
-    var weatherTemp = data.current.temp_f
+    // var weatherCountry = data.location.country
+    // var weatherLocation = data.location.name
+    // var weatherConditionIcon = data.current.condition.icon
+    // var weatherTemp = data.current.temp_f
 
-    $(weather).empty();
-    $(weather).append(weatherCountry + '<br>' + weatherLocation + '<br>' + weatherConditionIcon + '<br>' + weatherTemp + " F")
+    // $(weather).empty();
+    // $(weather).append(weatherCountry + '<br>' + weatherLocation + '<br>' + weatherConditionIcon + '<br>' + weatherTemp + " F")
 
   })
   .catch(err => {
