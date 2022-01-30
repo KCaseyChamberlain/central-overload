@@ -5,12 +5,12 @@ forecast.id = 'forecast';
 forecast.className = 'tile is-parent is-12 box';
 forecast.textContent = "Forecast";
 
-function getForecast(city) {
-  fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q="+city+"&days=7", {
+  function getForecast(city) {
+    fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q="+city+"&days=3",{
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
-      "x-rapidapi-key": "12b796900dmsh12b8fa6011f391ep1d4f63jsnff6a49444565"
+      "x-rapidapi-key": "933080ba96mshccf83a9f1a3bb02p17725ajsn4157f19eeff5"
     }
   })
   .then(response => {
@@ -28,3 +28,4 @@ function getForecast(city) {
   });
 };
 // Weather section ends here.
+getForecast()
