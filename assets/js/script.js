@@ -61,7 +61,7 @@ function user() {
       return response.json();
     })
     .then(data => {
-    getForecast(data.city);
+    // getForecast(data.city);
   })
   .catch(err => {
     console.error(err);
