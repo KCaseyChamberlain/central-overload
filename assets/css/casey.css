@@ -1,4 +1,9 @@
-.text-center{
+#weather-block{
 justify-content: center;
 text-align: center;
+}
+
+#weather-block-title {
+font-weight: bold;
+font-size: x-large;
 }
