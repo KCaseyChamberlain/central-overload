@@ -12,3 +12,7 @@ font-size: x-large;
     font-weight: bold;
     font-size: x-large;
     }
+
+#weather-block{
+    padding: 30px;
+}
