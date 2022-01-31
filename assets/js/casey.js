@@ -2,122 +2,133 @@
 const weatherBlock = document.createElement('div');
 center.appendChild(weatherBlock);
 weatherBlock.id = 'weather-block';
-weatherBlock.className = 'box';
+weatherBlock.className = 'box columns';
 
 // WEATHER BLOCK TITLE
-const weatherBlockTitle = document.createElement('div');
-weatherBlockTitle.id = 'weather-block-title'
-weatherBlockTitle.className = 'box';
-weatherBlock.appendChild(weatherBlockTitle)
-weatherBlockTitle.innerHTML="Weather"
+const weatherBlockCountry = document.createElement('div');
+weatherBlockCountry.id = 'weather-block-country'
+weatherBlockCountry.className = 'box';
+weatherBlock.appendChild(weatherBlockCountry)
+weatherBlockCountry.textContent="Country"
 
-
-// WEATHER COUNTRY
-const weatherCountryCols = document.createElement('div');
-weatherBlock.appendChild(weatherCountryCols);
-weatherCountryCols.id = "weather-country-cols";
-weatherCountryCols.className = 'box columns is-centered';
-// weatherCountryCols.textContent = "weatherCountryCols has been created!";
-
-const weatherCountryDiv = document.createElement('div');
-weatherCountryCols.appendChild(weatherCountryDiv);
-weatherCountryDiv.id = "weather-country-div";
-weatherCountryDiv.className = 'box  column is-is-one-third';
-weatherCountryDiv.textContent = "weatherCountryDiv has been created!";
-
-const weatherCountryDivTwo = document.createElement('div');
-weatherCountryCols.appendChild(weatherCountryDivTwo);
-weatherCountryDivTwo.id = "weather-country-div-two";
-weatherCountryDivTwo.className = 'box  column is-is-one-third';
-weatherCountryDivTwo.textContent = "weatherCountryDivTwo has been created!";
-
-const weatherCountryDivThree = document.createElement('div');
-weatherCountryCols.appendChild(weatherCountryDivThree);
-weatherCountryDivThree.id = "weather-country-div-three";
-weatherCountryDivThree.className = 'box  column is-is-one-third';
-weatherCountryDivThree.textContent = "weatherCountryDivThree has been created!";
-
-
-
-// WEATHER LOCATION
-const weatherLocationCols = document.createElement('div');
-weatherBlock.appendChild(weatherLocationCols);
-weatherLocationCols.id = "weather-location-cols";
-weatherLocationCols.className = 'box  columns';
-// weatherLocationCols.textContent = "weatherLocationCols has been created!";
-
-const weatherLocationDiv = document.createElement('div');
-weatherLocationCols.appendChild(weatherLocationDiv);
-weatherLocationDiv.id = "weather-location-div";
-weatherLocationDiv.className = 'box  column is-is-one-third';
-weatherLocationDiv.textContent = "weatherLocationDiv has been created!";
-
-const weatherLocationDivTwo = document.createElement('div');
-weatherLocationCols.appendChild(weatherLocationDivTwo);
-weatherLocationDivTwo.id = "weather-location-div-two";
-weatherLocationDivTwo.className = 'box  column is-is-one-third';
-weatherLocationDivTwo.textContent = "weatherLocationDivTwo has been created!";
-
-const weatherLocationDivThree = document.createElement('div');
-weatherLocationCols.appendChild(weatherLocationDivThree);
-weatherLocationDivThree.id = "weather-location-div-three";
-weatherLocationDivThree.className = 'box  column is-is-one-third';
-weatherLocationDivThree.textContent = "weatherLocationDivThree has been created!";
-
-
-
-// WEATHER ICON
-const weatherIconCols = document.createElement('div');
-weatherBlock.appendChild(weatherIconCols);
-weatherIconCols.id = "weather-icon-cols";
-weatherIconCols.className = 'box  columns';
-// weatherIconCols.textContent = "weatherIconcols has been created!";
-
-const weatherIconDiv = document.createElement('div');
-weatherIconCols.appendChild(weatherIconDiv);
-weatherIconDiv.id = "weather-icon-div";
-weatherIconDiv.className = 'box  column is-is-one-third';
-weatherIconDiv.textContent = "weatherIconDiv has been created!";
-
-const weatherIconDivTwo = document.createElement('div');
-weatherIconCols.appendChild(weatherIconDivTwo);
-weatherIconDivTwo.id = "weather-icon-div-two";
-weatherIconDivTwo.className = 'box  column is-is-one-third';
-weatherIconDivTwo.textContent = "weatherIconDivTwo has been created!";
-
-const weatherIconDivThree = document.createElement('div');
-weatherIconCols.appendChild(weatherIconDivThree);
-weatherIconDivThree.id = "weather-icon-div-three";
-weatherIconDivThree.className = 'box  column is-is-one-third';
-weatherIconDivThree.textContent = "weatherIconDivThree has been created!";
+const weatherBlockLocation = document.createElement('div');
+weatherBlockLocation.id = 'weather-block-location'
+weatherBlockLocation.className = 'box';
+weatherBlockCountry.appendChild(weatherBlockLocation)
+weatherBlockLocation.textContent="Location"
 
 
 
 
-// WEATHER TEMP
-const weatherTempCols = document.createElement('div');
-weatherBlock.appendChild(weatherTempCols);
-weatherTempCols.id = "weather-temp-cols";
-weatherTempCols.className = 'box  columns';
-// weatherTempCols.textContent = "weatherTempcols has been created!";
+// CURRENT WEATHER COL
+const currentWeatherCol = document.createElement('div');
+weatherBlock.appendChild(currentWeatherCol);
+currentWeatherCol.id = "current-weather-col";
+currentWeatherCol.className = 'box column is-3 is-centered';
+// currentWeatherCol.textContent = "currentWeatherCol has been created!";
 
-const weatherTempDiv = document.createElement('div');
-weatherTempCols.appendChild(weatherTempDiv);
-weatherTempDiv.id = "weather-temp-div";
-weatherTempDiv.className ='box  column is-is-one-third';
-weatherTempDiv.textContent = "weatherTempDiv has been created!";
+const currentWeatherCountryDiv = document.createElement('div');
+currentWeatherCol.appendChild(currentWeatherCountryDiv);
+currentWeatherCountryDiv.id = "current-weather-country-div";
+currentWeatherCountryDiv.className = 'box  columns is-3';
+currentWeatherCountryDiv.textContent = "currentWeatherCountryDiv has been created!";
 
-const weatherTempDivTwo = document.createElement('div');
-weatherTempCols.appendChild(weatherTempDivTwo);
-weatherTempDivTwo.id = "weather-temp-div-two";
-weatherTempDivTwo.className ='box  column is-is-one-third';
-weatherTempDivTwo.textContent = "weatherTempDivTwo has been created!";
+const currentWeatherLocationDiv = document.createElement('div');
+currentWeatherCol.appendChild(currentWeatherLocationDiv);
+currentWeatherLocationDiv.id = "current-weather-location-div";
+currentWeatherLocationDiv.className = 'box  columns is-3';
+currentWeatherLocationDiv.textContent = "currentWeatherLocationDiv has been created!";
 
-const weatherTempDivThree = document.createElement('div');
-weatherTempCols.appendChild(weatherTempDivThree);
-weatherTempDivThree.id = "weather-temp-div-three";
-weatherTempDivThree.className ='box  column is-is-one-third';
-weatherTempDivThree.textContent = "weatherTempDivThree has been created!";
+const currentWeatherIconDiv = document.createElement('div');
+currentWeatherCol.appendChild(currentWeatherIconDiv);
+currentWeatherIconDiv.id = "current-weather-icon-div";
+currentWeatherIconDiv.className = 'box  columns is-3';
+currentWeatherIconDiv.textContent = "currentWeatherIconDiv has been created!";
+
+const currentWeatherTempDiv = document.createElement('div');
+currentWeatherCol.appendChild(currentWeatherTempDiv);
+currentWeatherTempDiv.id = "current-weather-temp-div";
+currentWeatherTempDiv.className ='box  columns is-3';
+currentWeatherTempDiv.textContent = "currentWeatherTempDiv has been created!";
+
+
+
+
+
+
+
+
+
+// TOMORROW WEATHER COL
+const twoWeatherCol = document.createElement('div');
+weatherBlock.appendChild(twoWeatherCol);
+twoWeatherCol.id = "two-weather-col";
+twoWeatherCol.className = 'box column is-3 is-centered';
+// currentWeatherCol.textContent = "currentWeatherCol has been created!";
+
+const twoWeatherCountryDiv = document.createElement('div');
+twoWeatherCol.appendChild(twoWeatherCountryDiv);
+twoWeatherCountryDiv.id = "two-weather-country-div";
+twoWeatherCountryDiv.className = 'box  columns is-3';
+twoWeatherCountryDiv.textContent = "twoWeatherCountryDiv has been created!";
+
+const twoWeatherLocationDiv = document.createElement('div');
+twoWeatherCol.appendChild(twoWeatherLocationDiv);
+twoWeatherLocationDiv.id = "two-weather-location-div";
+twoWeatherLocationDiv.className = 'box  columns is-3';
+twoWeatherLocationDiv.textContent = "twoWeatherLocationDiv has been created!";
+
+const twoWeatherIconDiv = document.createElement('div');
+twoWeatherCol.appendChild(twoWeatherIconDiv);
+twoWeatherIconDiv.id = "two-weather-icon-div";
+twoWeatherIconDiv.className = 'box  columns is-3';
+twoWeatherIconDiv.textContent = "twoWeatherIconDiv has been created!";
+
+const twoWeatherTempDiv = document.createElement('div');
+twoWeatherCol.appendChild(twoWeatherTempDiv);
+twoWeatherTempDiv.id = "two-weather-temp-div";
+twoWeatherTempDiv.className ='box  columns is-3';
+twoWeatherTempDiv.textContent = "twoWeatherTempDiv has been created!";
+
+
+
+
+
+
+
+
+
+
+// DAY AFTER TOMORROW WEATHER COL
+const threeWeatherCol = document.createElement('div');
+weatherBlock.appendChild(threeWeatherCol);
+threeWeatherCol.id = "three-weather-col";
+threeWeatherCol.className = 'box column is-3 is-centered';
+// currentWeatherCol.textContent = "currentWeatherCol has been created!";
+
+const threeWeatherCountryDiv = document.createElement('div');
+threeWeatherCol.appendChild(threeWeatherCountryDiv);
+threeWeatherCountryDiv.id = "three-weather-country-div";
+threeWeatherCountryDiv.className = 'box  columns is-3';
+threeWeatherCountryDiv.textContent = "threeWeatherCountryDiv has been created!";
+
+const threeWeatherLocationDiv = document.createElement('div');
+threeWeatherCol.appendChild(threeWeatherLocationDiv);
+threeWeatherLocationDiv.id = "three-weather-location-div";
+threeWeatherLocationDiv.className = 'box  columns is-3';
+threeWeatherLocationDiv.textContent = "threeWeatherLocationDiv has been created!";
+
+const threeWeatherIconDiv = document.createElement('div');
+threeWeatherCol.appendChild(threeWeatherIconDiv);
+threeWeatherIconDiv.id = "three-weather-icon-div";
+threeWeatherIconDiv.className = 'box  columns is-3';
+threeWeatherIconDiv.textContent = "threeWeatherIconDiv has been created!";
+
+const threeWeatherTempDiv = document.createElement('div');
+threeWeatherCol.appendChild(threeWeatherTempDiv);
+threeWeatherTempDiv.id = "three-weather-temp-div";
+threeWeatherTempDiv.className ='box  columns is-3';
+threeWeatherTempDiv.textContent = "threeWeatherTempDiv has been created!";
 
 
 

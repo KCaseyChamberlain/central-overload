@@ -3,7 +3,12 @@ justify-content: center;
 text-align: center;
 }
 
-#weather-block-title {
+#weather-block-location {
 font-weight: bold;
 font-size: x-large;
 }
+
+#weather-block-country {
+    font-weight: bold;
+    font-size: x-large;
+    }
