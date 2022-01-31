@@ -188,9 +188,6 @@ threeWeatherTempDiv.textContent = "threeWeatherTempDiv has been created!";
     // var weatherConditionIcon = data.current.condition.icon
     // var weatherTemp = data.current.temp_f
 
-    // $(weather).empty();
-    // $(weather).append(weatherCountry + '<br>' + weatherLocation + '<br>' + weatherConditionIcon + '<br>' + weatherTemp + " F")
-
   })
   .catch(err => {
 	  console.error(err);
@@ -220,13 +217,12 @@ var getLocation = function (currentLocation){
 }
 
 
-// DISPLAYS CURRENT DIVS INFO
+// DISPLAYS CURRENT WEATHER'S INFO
 var currentTime = function () {
   timeEL = document.querySelector('#current-weather-date-div')
   timeEL.innerHTML = moment().format('MMMM Do');
 }
 setInterval(currentTime, 1000);
-
 
 var getCurrentCondition = function (currentCondition){
   var condition = document.querySelector("#current-weather-condition-div");
@@ -234,11 +230,13 @@ var getCurrentCondition = function (currentCondition){
   $(condition).append(currentCondition);
 }
 
-
-var getCurrentIcon = function (currentIcon){
+// START OF GET CURRENT WEATHER ICON
+var getCurrentIcon =  function (currentIcon){
   var icon = document.querySelector("#current-weather-icon-div");
   $(icon).empty();
-  $(icon).append(currentIcon);
+  var img = document.createElement('img')
+  $(icon).append(img);
+  $(img).attr('src', currentIcon);
 }
 
 var getCurrentTemp = function (currentTemp){
