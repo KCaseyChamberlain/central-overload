@@ -20,9 +20,12 @@ main.className = "tile is-ancestor";
 
 const left = document.createElement("div");
 main.appendChild(left);
-left.id = "left";
-left.className = "tile is-parent is-2 box";
-left.textContent = "Movie Info";
+
+
+left.id = 'left';
+left.className = 'tile is-parent is-2 box';
+left.textContent = 'link'
+
 
 const center = document.createElement("div");
 main.appendChild(center);
@@ -31,9 +34,12 @@ center.className = "tile is-parent is-vertical is-8";
 
 const right = document.createElement("div");
 main.appendChild(right);
-right.id = "right";
-right.className = "tile is-parent is-2 box";
-right.textContent = "Right";
+
+right.id = 'right';
+right.className = 'tile is-parent is-2, is-vertical box';
+right.innerHTML = "<div class='tile is-child is-2'> COVID-19 Daily Stats </div>" ;
+
+
 // Main ends here.
 // Here we get user's IP address so we can find user's location.
 function user() {
