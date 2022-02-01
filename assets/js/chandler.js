@@ -1,15 +1,18 @@
 // Movies section
-var leftEl = document.getElementById("left");
+
 var inputEl = document.createElement("input");
 var buttonEl = document.createElement("button");
+var movieEl = document.createElement("div");
 
-leftEl.appendChild(inputEl);
-leftEl.appendChild(buttonEl);
+left.appendChild(inputEl);
+left.appendChild(buttonEl);
+left.appendChild(movieEl);
 
 inputEl.setAttribute("placeholder", "Find Movies");
 buttonEl.textContent = "Search";
 //Find movies
 function getMovies() {
+  movieEl.innerHTML = "";
   var moviesSearch = inputEl.value;
   fetch("https://imdb8.p.rapidapi.com/title/find?q=" + moviesSearch, {
     method: "GET",
@@ -31,16 +34,18 @@ function getMovies() {
           var moviesYear = document.createElement("p");
           var moviesTime = document.createElement("h3");
           var moviesPoster = document.createElement("img");
+          var url = data.results[i].image.url;
 
-          moviesPoster.textContent = data.results[i].image;
-          moviesName.textContent = data.results[i].title;
-          moviesYear.textContent = data.results[i].year;
-          moviesTime.textContent = data.results[i].runningTimeInMinutes;
+          moviesPoster.setAttribute("src", url);
+          moviesName.textContent = "Movie Name = " + data.results[i].title;
+          moviesYear.textContent = "Year Made = " + data.results[i].year;
+          moviesTime.textContent =
+            "Length = " + data.results[i].runningTimeInMinutes;
 
-          leftEl.appendChild(moviesPoster);
-          leftEl.appendChild(moviesName);
-          leftEl.appendChild(moviesYear);
-          leftEl.appendChild(moviesTime);
+          movieEl.appendChild(moviesPoster);
+          movieEl.appendChild(moviesName);
+          movieEl.appendChild(moviesYear);
+          movieEl.appendChild(moviesTime);
         }
       }
     })
