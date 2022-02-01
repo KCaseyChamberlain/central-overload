@@ -64,4 +64,6 @@ margin-bottom: 20px;
 #two-weather-col,
 #three-weather-col{
     background-color: rgb(200, 206, 230);
+    margin-bottom: auto;
 }
+

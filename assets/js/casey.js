@@ -2,7 +2,7 @@
 const weatherBlock = document.createElement('div');
 center.appendChild(weatherBlock);
 weatherBlock.id = 'weather-block';
-weatherBlock.className = 'box columns';
+weatherBlock.className = 'box columns tile';
 
 // WEATHER BLOCK LOCATION
 const locationCol = document.createElement('div');
@@ -88,7 +88,7 @@ twoWeatherTempDiv.textContent = "twoWeatherTempDiv has been created!";
 const threeWeatherCol = document.createElement('div');
 weatherBlock.appendChild(threeWeatherCol);
 threeWeatherCol.id = "three-weather-col";
-threeWeatherCol.className = 'box column is-3 is-centered';
+threeWeatherCol.className = 'box column is-3 is-centered tile is-child';
 // currentWeatherCol.textContent = "currentWeatherCol has been created!";
 
 const threeWeatherDateDiv = document.createElement('div');
