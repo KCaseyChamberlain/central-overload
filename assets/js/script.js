@@ -37,7 +37,7 @@ main.appendChild(right);
 
 right.id = 'right';
 right.className = 'tile is-parent is-2, is-vertical box';
-right.innerHTML = "<div class='tile is-child is-2'> COVID-19 Daily Stats </div>" ;
+right.textContent = "COVID-19 Stats by Yesterday";
 
 
 // Main ends here.

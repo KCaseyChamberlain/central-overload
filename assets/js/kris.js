@@ -1,55 +1,95 @@
 // const { timeLog } = require("console");
 
-var yesterday = moment().subtract(1,'days').format('YYYY-MM-DD')
-var covid=document.createElement('div')
-right.appendChild(covid)
+var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+var covid = document.createElement('div');
+right.appendChild(covid);
 covid.className = 'tile is-child';
 
-function covidStats(){
+function covidStats() {
 
-fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date="+yesterday, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
-		"x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
-	}
-})
+  fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date=" + yesterday, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+    }
+  })
 
-.then(response => {
-	return response.json();
-})
+    .then(response => {
+      return response.json();
+    })
 
+    .then(data => {
+      var deathsTitle = document.createElement('h4');
+      covid.appendChild(deathsTitle);
+      deathsTitle.textContent = "Deaths:  ";
+      var deaths = document.createElement('div')
+      covid.appendChild(deaths);
+      deaths.textContent = data.data.deaths;
 
-.then(data => {
-console.log(data);
+      var fatalityRateTitle = document.createElement('h4');
+      covid.appendChild(fatalityRateTitle);
+      fatalityRateTitle.textContent = "Fatality Rate:  ";
 
-var datelabel=document.createElement('div')
-covid.appendChild(datelabel);
-datelabel.textContent = 'Date:';
-datelabel.setAttribute('class', 'subtitle')
+      var fatalityRate = document.createElement('div')
+      covid.appendChild(fatalityRate);
+      fatalityRate.textContent = data.data.fatality_rate;
+    })
 
-var date=document.createElement('div')
-covid.appendChild(date);
-date.textContent = data.data.date;
-date.setAttribute('class', 'title')
-
-var deaths=document.createElement('div')
-covid.appendChild(deaths);
-deaths.textContent = data.data.deaths;
-
-
-var fatality_rate=document.createElement('div')
-covid.appendChild(fatality_rate);
-fatality_rate.textContent = data.data.fatality_rate;
-
-var recovered=document.createElement('div')
-covid.appendChild(recovered);
-recovered.textContent = data.data.recovered;
-})
-
-
-.catch(err => {
-	console.error(err);
-});
+    .catch(err => {
+      console.error(err);
+    });
 };
- covidStats();
+
+function searchStates() {
+  fetch("https://covid-19-statistics.p.rapidapi.com/reports?iso=USA&region_name=US&date=" + yesterday, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      for (var i = 0; i < data.data.length; i++) {
+        console.log(data.data[i].region.province);
+        console.log(data.data[i].deaths);
+        console.log(data.data[i].fatality_rate);
+
+        var stateListTitle = document.createElement('h4');
+        covid.appendChild(stateListTitle);
+        stateListTitle.textContent = "Region Name:  ";
+
+        var stateList = document.createElement('h4')
+        covid.appendChild(stateList);
+        stateList.id = 'state-list';
+        stateList.textContent = data.data[i].region.province;
+
+        var deathsByStateTitle = document.createElement('h4');
+        covid.appendChild(deathsByStateTitle);
+        deathsByStateTitle.textContent = "Deaths:  ";
+
+        var deathsByState = document.createElement('p')
+        covid.appendChild(deathsByState);
+        deathsByState.className = 'dbs';
+        deathsByState.textContent = data.data[i].deaths;
+
+        var fatalityByStateRateTitle = document.createElement('h4');
+        covid.appendChild(fatalityByStateRateTitle);
+        fatalityByStateRateTitle.textContent = "Fatality Rate:  ";
+
+        var fatalityByStateRate = document.createElement('p')
+        covid.appendChild(fatalityByStateRate);
+        fatalityByStateRate.className = 'dbs';
+        fatalityByStateRate.textContent = data.data[i].fatality_rate;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+covidStats();
+searchStates();
