@@ -2,7 +2,7 @@
 
 var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 var covid = document.createElement('div');
-right.appendChild(covid);
+rightSide.appendChild(covid);
 covid.className = 'tile is-child';
 
 function covidStats() {
@@ -53,12 +53,7 @@ function searchStates() {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       for (var i = 0; i < data.data.length; i++) {
-        console.log(data.data[i].region.province);
-        console.log(data.data[i].deaths);
-        console.log(data.data[i].fatality_rate);
-
         var stateListTitle = document.createElement('h4');
         covid.appendChild(stateListTitle);
         stateListTitle.textContent = "Region Name:  ";

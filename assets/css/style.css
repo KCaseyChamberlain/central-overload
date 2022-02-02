@@ -12,6 +12,11 @@ header {
   align-items: center;
   flex-wrap: wrap;
 }
+body {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
 #day {
   width: 300px;
   text-align: start;
@@ -39,6 +44,10 @@ h1 {
   display: block;
   position: relative;
   animation: animate 5s ease-in-out infinite;
+}
+h2 {
+  font-family: 'Bangers', cursive;
+  font-size: 2rem;
 }
 @keyframes animate {
   0% {
@@ -80,25 +89,45 @@ h1 {
   color: var(--secondary);
   font-family: 'Bangers', cursive;
 }
-#left {
-  margin-left: 20px;
-}
-#right {
-  margin-right: 20px;
-}
-.tile.is-2 {
-  flex: auto;
+#left-side, #center, #right-side {
+  height: 100%;
 }
 .box {
   background-color: var(--secondary);
 }
-@media screen and (max-width: 768px) {
-  #center {
-    margin: 10px;
-  }
-  #left, #right {
-    margin: 0px 20px;
-  }
+.movies {
+  margin: 10px 0px;
+}
+#weather {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 100%;
+}
+#weather div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+}
+#weather div p {
+  font-size: 0.75rem;
+}
+.weather-date {
+  font-size: 1rem;
+  font-family: 'Bangers', cursive;
+}
+#news-input, #news-button, #movies-input, #movies-button {
+  padding: 5px;
+  margin: 2px !important;
+  font-size: 1.25rem;
+  border-radius: 8px;
+}
+#news-button, #movies-button {
+  font-family: 'Bangers', cursive;
+  background-color: var(--primary);
+  color: var(--secondary);
 }
 @media screen and (max-width: 860px) {
   #day, #time {
@@ -107,6 +136,11 @@ h1 {
   }
   h1 {
     font-size: 2rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  #news-input, #news-button, #movies-input, #movies-button {
+    width: 100%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -128,7 +162,6 @@ footer {
   flex-wrap: wrap;
 }
 h6 {
-  padding: 10px;
   font-size: 1.5rem;
   margin-left: 10px;
   margin-right: 10px;

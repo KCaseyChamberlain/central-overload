@@ -1,18 +1,12 @@
 // Movies section
 
-var inputEl = document.createElement("input");
-var buttonEl = document.createElement("button");
-var movieEl = document.createElement("div");
+var inputEl = document.querySelector('#movies-input');
+var buttonEl = document.querySelector('#movies-button');
+var movieEl = document.querySelector('#movies-list');
 
-left.appendChild(inputEl);
-left.appendChild(buttonEl);
-left.appendChild(movieEl);
-
-inputEl.setAttribute("placeholder", "Find Movies");
-buttonEl.textContent = "Search";
 //Find movies
 function getMovies() {
-  movieEl.innerHTML = "";
+  // movieEl.innerHTML = "";
   var moviesSearch = inputEl.value;
   fetch("https://imdb8.p.rapidapi.com/title/find?q=" + moviesSearch, {
     method: "GET",
@@ -27,7 +21,6 @@ function getMovies() {
     })
     //Pull data
     .then((data) => {
-      console.log(data);
       for (var i = 0; i < data.results.length; i++) {
         if (data.results[i].titleType === "movie") {
           var moviesName = document.createElement("h2");
@@ -39,20 +32,19 @@ function getMovies() {
           moviesPoster.setAttribute("src", url);
           moviesName.textContent = "Movie Name = " + data.results[i].title;
           moviesYear.textContent = "Year Made = " + data.results[i].year;
-          moviesTime.textContent =
-            "Length = " + data.results[i].runningTimeInMinutes;
+          moviesTime.textContent = "Length = " + data.results[i].runningTimeInMinutes;
 
           movieEl.appendChild(moviesPoster);
           movieEl.appendChild(moviesName);
           movieEl.appendChild(moviesYear);
           movieEl.appendChild(moviesTime);
         }
-      }
+      };
     })
     .catch((err) => {
       console.error(err);
     });
-}
+};
 //Button
 buttonEl.addEventListener("click", function () {
   getMovies();
