@@ -95,9 +95,6 @@ h2 {
 .box {
   background-color: var(--secondary);
 }
-.movies {
-  margin: 10px 0px;
-}
 #weather {
   display: flex;
   flex-wrap: wrap;
@@ -121,7 +118,7 @@ h2 {
 #news-input, #news-button, #movies-input, #movies-button {
   padding: 5px;
   margin: 2px !important;
-  font-size: 1.25rem;
+  font-size: 1rem;
   border-radius: 8px;
 }
 #news-button, #movies-button {

@@ -19,13 +19,15 @@ const leftSide = document.querySelector('#left-side');
 const center = document.querySelector('#center');
 const rightSide = document.querySelector('#right-side');
 // Main ends here.
+
 // Movies list starts here.
 var inputEl = document.querySelector('#movies-input');
 var buttonEl = document.querySelector('#movies-button');
 var movieEl = document.querySelector('#movies-list');
 var movieTitle = localStorage.getItem('keymovie');
+// Here it searches local storage to see if there is any movie title stored inside it and if there is not it searches for "The Godfather" by defult.
 if (movieTitle == "" || movieTitle == null) {
-  localStorage.setItem('keymovie', "Underworld");
+  localStorage.setItem('keymovie', "The Godfather");
 }
 buttonEl.addEventListener('click', function() {
   var moviesSearch = inputEl.value;
@@ -36,7 +38,6 @@ buttonEl.addEventListener('click', function() {
   movieTitle = localStorage.getItem('keymovie');
   getMovies();
 });
-//Find movies
 function getMovies() {
   movieEl.innerHTML = "";
   movieTitle = localStorage.getItem('keymovie');
@@ -47,60 +48,57 @@ function getMovies() {
       "x-rapidapi-key": "fcf1d86f53mshed2a791c0ac3101p14b521jsn848124570e2d",
     },
   })
-    //Find response
-    .then((response) => {
-      return response.json();
-    })
-    //Pull data
-    .then((data) => {
-      console.log(data);
-      for (var i = 0; i < data.results.length; i++) {
-        if (data.results[i].titleType === "movie") {
-          var movies = document.createElement('div');
-          movieEl.appendChild(movies);
-          movies.className = 'movies';
-          var moviesPoster = document.createElement('img');
-          movies.appendChild(moviesPoster);
-          moviesPoster.setAttribute("src", data.results[i].image.url);
-          var moviesName = document.createElement('p');
-          movies.appendChild(moviesName);
-          moviesName.textContent = "Name: " + data.results[i].title;
-          if (data.results[i].year == "" || data.results[i].year == null) {
-            console.log(data.results[i].title + " Has Undefined Year!")
-          } else {
-            var moviesYear = document.createElement('p');
-            movies.appendChild(moviesYear);
-            moviesYear.textContent = "Year: " + data.results[i].year;
-          }
-          if (data.results[i].runningTimeInMinutes == "" || data.results[i].runningTimeInMinutes == null) {
-            console.log(data.results[i].title + " Has Undefined Length!")
-          } else {
-            var moviesTime = document.createElement('p');
-            movies.appendChild(moviesTime);          
-            moviesTime.textContent = "Length: " + data.results[i].runningTimeInMinutes + " Minutes";
-          }
-          if (data.results[i].principals == "" || data.results[i].principals == null) {
-            console.log(data.results[i].title + " Has Undefined Casts!")
-          } else {
-            var principals = document.createElement('div');
-            movies.appendChild(principals);
-            principals.textContent = "Casts:";
-            for (var x = 0; x < data.results[i].principals.length; x++) {
-              var principal = document.createElement('p');
-              principals.appendChild(principal);
-              principal.textContent = data.results[i].principals[x].name;
-            }
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    for (var i = 0; i < data.results.length; i++) {
+      if (data.results[i].titleType === "movie") {
+        var movies = document.createElement('div');
+        movieEl.appendChild(movies);
+        movies.className = 'tile is-child is-12'
+        var moviesPoster = document.createElement('img');
+        movies.appendChild(moviesPoster);
+        moviesPoster.setAttribute("src", data.results[i].image.url);
+        var moviesName = document.createElement('p');
+        movies.appendChild(moviesName);
+        moviesName.textContent = "Name: " + data.results[i].title;
+        if (data.results[i].year == "" || data.results[i].year == null) {
+          console.log(data.results[i].title + " Has Undefined Year!")
+        } else {
+          var moviesYear = document.createElement('p');
+          movies.appendChild(moviesYear);
+          moviesYear.textContent = "Year: " + data.results[i].year;
+        }
+        if (data.results[i].runningTimeInMinutes == "" || data.results[i].runningTimeInMinutes == null) {
+          console.log(data.results[i].title + " Has Undefined Length!")
+        } else {
+          var moviesTime = document.createElement('p');
+          movies.appendChild(moviesTime);          
+          moviesTime.textContent = "Length: " + data.results[i].runningTimeInMinutes + " Minutes";
+        }
+        if (data.results[i].principals == "" || data.results[i].principals == null) {
+          console.log(data.results[i].title + " Has Undefined Stars!")
+        } else {
+          var principals = document.createElement('div');
+          movies.appendChild(principals);
+          principals.textContent = "Stars:";
+          for (var x = 0; x < data.results[i].principals.length; x++) {
+            var principal = document.createElement('p');
+            principals.appendChild(principal);
+            principal.textContent = data.results[i].principals[x].name;
           }
         }
-      };
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      }
+    };
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 };
-//Button
 // Movies list ends here.
-// Weather starts here
+
+// Weather starts here.
 const weatherBlock = document.querySelector('#weather');
 // Here we use user's IP address to find user's location.
 function userLocation(ip) {
@@ -194,7 +192,8 @@ function getWeather(lat, lon) {
 	  console.error(err);
   });
 };
-// Weather ends here
+// Weather ends here.
+
 // News section starts here.
 const search = document.querySelector('#search');
 const searchInput = document.querySelector('#news-input');
@@ -423,9 +422,98 @@ function getNews() {
 	  console.error(err);
 })};
 // News section ends here.
-// buttonEl.addEventListener('click', function () {
-//   getMovies();
-// });
+
+// Covid-19 stats starts here.
+var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+var covid = document.createElement('div');
+rightSide.appendChild(covid);
+covid.className = 'tile is-child';
+
+function covidStats() {
+
+  fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date=" + yesterday, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+    }
+  })
+
+    .then(response => {
+      return response.json();
+    })
+
+    .then(data => {
+      var deathsTitle = document.createElement('h4');
+      covid.appendChild(deathsTitle);
+      deathsTitle.textContent = "Deaths:  ";
+      var deaths = document.createElement('div')
+      covid.appendChild(deaths);
+      deaths.textContent = data.data.deaths;
+
+      var fatalityRateTitle = document.createElement('h4');
+      covid.appendChild(fatalityRateTitle);
+      fatalityRateTitle.textContent = "Fatality Rate:  ";
+
+      var fatalityRate = document.createElement('div')
+      covid.appendChild(fatalityRate);
+      fatalityRate.textContent = data.data.fatality_rate;
+    })
+
+    .catch(err => {
+      console.error(err);
+    });
+};
+
+function searchStates() {
+  fetch("https://covid-19-statistics.p.rapidapi.com/reports?iso=USA&region_name=US&date=" + yesterday, {
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      for (var i = 0; i < data.data.length; i++) {
+        var stateListTitle = document.createElement('h4');
+        covid.appendChild(stateListTitle);
+        stateListTitle.textContent = "Region Name:  ";
+
+        var stateList = document.createElement('h4')
+        covid.appendChild(stateList);
+        stateList.id = 'state-list';
+        stateList.textContent = data.data[i].region.province;
+
+        var deathsByStateTitle = document.createElement('h4');
+        covid.appendChild(deathsByStateTitle);
+        deathsByStateTitle.textContent = "Deaths:  ";
+
+        var deathsByState = document.createElement('p')
+        covid.appendChild(deathsByState);
+        deathsByState.className = 'dbs';
+        deathsByState.textContent = data.data[i].deaths;
+
+        var fatalityByStateRateTitle = document.createElement('h4');
+        covid.appendChild(fatalityByStateRateTitle);
+        fatalityByStateRateTitle.textContent = "Fatality Rate:  ";
+
+        var fatalityByStateRate = document.createElement('p')
+        covid.appendChild(fatalityByStateRate);
+        fatalityByStateRate.className = 'dbs';
+        fatalityByStateRate.textContent = data.data[i].fatality_rate;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+// Covid-19 stats ends here.
+
 getMovies();
 user();
 getNews();
+covidStats();
+searchStates();

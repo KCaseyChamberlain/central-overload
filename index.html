@@ -10,9 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/bulma.css">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <!-- <link rel="stylesheet" href="./assets/css/casey.css"> -->
-  <!-- <link rel="stylesheet" href="./assets/css/chandler.css"> -->
-  <!-- <link rel="stylesheet" href="./assets/css/kris.css"> -->
 </head>
 <body>
   <header>
@@ -22,10 +19,12 @@
   </header>
   <main id="main" class="tile is-ancestor">
     <div id="left-side" class="tile is-parent is-2 is-vertical box">
-      <h2 class="tile is-child is-12 has-text-centered">Movie Search</h2>
-      <input type="search" name="Search Movies" id="movies-input" class="tile is-child is-12" placeholder="Find Movie You Like!">
-      <button id="movies-button" class="tile is-child is-12">Search</button>
-      <div id="movies-list"></div>
+      <div id="movies-search" class="tile is-parent is-vertical is-12">
+        <h2 class="tile is-child is-12 has-text-centered">Movie Search</h2>
+        <input type="search" name="Search Movies" id="movies-input" class="tile is-child is-12" placeholder="Find Movie You Like!">
+        <button id="movies-button" class="tile is-child is-12">Search</button>
+      </div>
+      <div id="movies-list" class="tile is-parent is-vertical is-12"></div>
     </div>
     <div id="center" class="tile is-parent is-vertical is-8">
       <div id="weather" class="tile is-parent is-12 box"></div>
@@ -45,9 +44,5 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
-  <!-- <script src="./assets/js/casey.js"></script> -->
-  <!-- <script src="./assets/js/amir.js"></script> -->
-  <!-- <script src="./assets/js/chandler.js"></script> -->
-  <script src="./assets/js/kris.js"></script>
 </body>
 </html>
