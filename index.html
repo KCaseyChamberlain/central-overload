@@ -10,26 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/bulma.css">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/casey.css">
-  <link rel="stylesheet" href="./assets/css/amir.css">
-  <link rel="stylesheet" href="./assets/css/chandler.css">
-  <link rel="stylesheet" href="./assets/css/kris.css">
 </head>
 <body>
-  <header id="header">
+  <header>
     <div id="day"></div>
     <a href="/" class=""><h1>Uhoo!</h1></a>
     <div id="time"></div>
   </header>
-  <main id="main"></main>
+  <main id="main" class="tile is-ancestor">
+    <div id="left-side" class="tile is-parent is-2 is-vertical box">
+      <div id="movies-search" class="tile is-parent is-vertical is-12">
+        <h2 class="tile is-child is-12 has-text-centered">Movie Search</h2>
+        <input type="search" name="Search Movies" id="movies-input" class="tile is-child is-12" placeholder="Find Movie You Like!">
+        <button id="movies-button" class="tile is-child is-12">Search</button>
+      </div>
+      <div id="movies-list" class="tile is-parent is-vertical is-12"></div>
+    </div>
+    <div id="center" class="tile is-parent is-vertical is-8">
+      <div id="weather" class="tile is-parent is-12 box"></div>
+      <div id="search" class="tile is-parent is-12 box">
+        <input type="search" name="Search News" id="news-input" class="tile is-child is-9" placeholder="Type News Topic You Like!">
+        <button id="news-button" class="tile is-child is-3">Search</button>
+      </div>
+      <div id="news" class="tile is-parent is-vertical is-12 box"></div>
+    </div>
+    <div id="right-side" class="tile is-parent is-2 is-vertical box">
+      <h2 class="tile is-child is-12 has-text-centered">COVID-19 Stats by Yesterday</h2>
+    </div>
+  </main>
   <footer id="footer">
     <h6>Thank You For Visiting Our Page!</h6>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/casey.js"></script>
-  <script src="./assets/js/amir.js"></script>
-  <script src="./assets/js/chandler.js"></script>
-  <script src="./assets/js/kris.js"></script>
 </body>
 </html>
