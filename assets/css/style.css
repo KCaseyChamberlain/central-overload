@@ -126,6 +126,9 @@ h2 {
   background-color: var(--primary);
   color: var(--secondary);
 }
+#news {
+  flex-wrap: wrap;
+}
 @media screen and (max-width: 860px) {
   #day, #time {
     width: 200px;
