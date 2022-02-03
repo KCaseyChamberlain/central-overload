@@ -49,6 +49,14 @@ h2 {
   font-family: 'Bangers', cursive;
   font-size: 2rem;
 }
+h4 {
+  font-family: ; font-family: 'Bangers', cursive;
+  font-size: 1.25rem;
+}
+h5 {
+  font-family: ; font-family: 'Bangers', cursive;
+  font-size: 1rem;
+}
 @keyframes animate {
   0% {
     transform: translateZ(100px);
