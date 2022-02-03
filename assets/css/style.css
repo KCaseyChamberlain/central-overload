@@ -4,6 +4,9 @@
 }
 body {
   background-color: var(--primary);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
 }
 header {
   padding: 10px;
@@ -12,16 +15,19 @@ header {
   align-items: center;
   flex-wrap: wrap;
 }
-body {
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-}
 #day {
   width: 300px;
   text-align: start;
   font-size: 1.5rem;
   margin: 0px 10px 0px 20px;
+  color: var(--secondary);
+  font-family: 'Bangers', cursive;
+}
+#time {
+  width: 300px;
+  text-align: end;
+  font-size: 1.5rem;
+  margin: 0px 20px 0px 10px;
   color: var(--secondary);
   font-family: 'Bangers', cursive;
 }
@@ -99,14 +105,6 @@ h6 {
     height: 100%;
     color: blue;
   }
-}
-#time {
-  width: 300px;
-  text-align: end;
-  font-size: 1.5rem;
-  margin: 0px 20px 0px 10px;
-  color: var(--secondary);
-  font-family: 'Bangers', cursive;
 }
 #left-side, #center, #right-side {
   height: 100%;
