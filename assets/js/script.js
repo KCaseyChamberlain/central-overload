@@ -204,8 +204,8 @@ const search = document.querySelector('#search');
 const searchInput = document.querySelector('#news-input');
 const searchButton = document.querySelector('#news-button');
 const news = document.querySelector('#news');
-// Here it searches local storage to see if there is any news topic stored inside it and if there is not it searches for "Breaking News" by defult.
 var topic = localStorage.getItem('keytopic');
+// Here it searches local storage to see if there is any news topic stored inside it and if there is not it searches for "Breaking News" by defult.
 if (topic == "" || topic == null) {
   localStorage.setItem('keytopic', "Breaking News");
 }
@@ -219,6 +219,7 @@ searchButton.addEventListener('click', function() {
   getNews();
 });
 function getNews() {
+  news.innerHTML = "";
   topic = localStorage.getItem('keytopic');
   fetch("https://free-news.p.rapidapi.com/v1/search?q="+topic+"&lang=en", {
 	  "method": "GET",

@@ -49,13 +49,24 @@ h2 {
   font-family: 'Bangers', cursive;
   font-size: 2rem;
 }
+h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+}
 h4 {
-  font-family: ; font-family: 'Bangers', cursive;
+  font-family: 'Bangers', cursive;
   font-size: 1.25rem;
 }
 h5 {
-  font-family: ; font-family: 'Bangers', cursive;
+  font-family: 'Bangers', cursive;
   font-size: 1rem;
+}
+h6 {
+  font-size: 1.25rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: var(--secondary);
+  font-family: 'Bangers', cursive;
 }
 @keyframes animate {
   0% {
@@ -168,12 +179,4 @@ footer {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
-h6 {
-  font-size: 1.5rem;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: var(--secondary);
-  font-family: 'Bangers', cursive;
-  text-shadow: 0 0 2.5px var(--secondary);
 }
