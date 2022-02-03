@@ -296,15 +296,19 @@ function covidStats() {
     globalTitle.textContent = "Global Stats";
     var deathsTitle = document.createElement('h4');
     worldStats.appendChild(deathsTitle);
+    deathsTitle.className = 'tile is-child is-12 has-text-centered';
     deathsTitle.textContent = "Deaths:";
-    var deaths = document.createElement('p')
+    var deaths = document.createElement('p');
     worldStats.appendChild(deaths);
+    deaths.className = 'tile is-child is-12 has-text-centered has-text-danger';
     deaths.textContent = data.data.deaths;
     var fatalityRateTitle = document.createElement('h4');
     worldStats.appendChild(fatalityRateTitle);
+    fatalityRateTitle.className = 'tile is-child is-12 has-text-centered';
     fatalityRateTitle.textContent = "Fatality Rate:";
     var fatalityRate = document.createElement('p');
     worldStats.appendChild(fatalityRate);
+    fatalityRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
     fatalityRate.textContent = data.data.fatality_rate;
   })
 
@@ -332,21 +336,27 @@ function searchStates() {
     for (var i = 0; i < data.data.length; i++) {
       var stateListTitle = document.createElement('h4');
       stateSearch.appendChild(stateListTitle);
+      stateListTitle.className = 'tile is-child is-12 has-text-centered';
       stateListTitle.textContent = "Region Name:";
       var stateList = document.createElement('p');
       stateSearch.appendChild(stateList);
+      stateList.className = 'tile is-child is-12 has-text-centered has-text-link';
       stateList.textContent = data.data[i].region.province;
       var deathsByStateTitle = document.createElement('h4');
       stateSearch.appendChild(deathsByStateTitle);
+      deathsByStateTitle.className = 'tile is-child is-12 has-text-centered';
       deathsByStateTitle.textContent = "Deaths:";
       var deathsByState = document.createElement('p');
       stateSearch.appendChild(deathsByState);
+      deathsByState.className = 'tile is-child is-12 has-text-centered has-text-danger';
       deathsByState.textContent = data.data[i].deaths;
       var fatalityByStateRateTitle = document.createElement('h4');
       stateSearch.appendChild(fatalityByStateRateTitle);
+      fatalityByStateRateTitle.className = 'tile is-child is-12 has-text-centered';
       fatalityByStateRateTitle.textContent = "Fatality Rate:";
       var fatalityByStateRate = document.createElement('p');
       stateSearch.appendChild(fatalityByStateRate);
+      fatalityByStateRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
       fatalityByStateRate.textContent = data.data[i].fatality_rate;
     }
   })
