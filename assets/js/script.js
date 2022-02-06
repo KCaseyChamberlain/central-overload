@@ -56,25 +56,29 @@ function getMovies() {
       if (data.results[i].titleType === "movie") {
         var movies = document.createElement('div');
         movieEl.appendChild(movies);
-        movies.className = 'tile is-child is-12'
+        movies.className = 'tile is-parent is-12 is-vertical'
         var moviesPoster = document.createElement('img');
         movies.appendChild(moviesPoster);
+        moviesPoster.className = 'tile is-child is-12';
         moviesPoster.setAttribute("src", data.results[i].image.url);
-        var moviesName = document.createElement('p');
+        var moviesName = document.createElement('h4');
         movies.appendChild(moviesName);
-        moviesName.textContent = "Name: " + data.results[i].title;
+        moviesName.className = 'tile is-child is-12 has-text-centered';
+        moviesName.textContent = data.results[i].title;
         if (data.results[i].year == "" || data.results[i].year == null) {
           console.log(data.results[i].title + " Has Undefined Year!")
         } else {
-          var moviesYear = document.createElement('p');
+          var moviesYear = document.createElement('h5');
           movies.appendChild(moviesYear);
+          moviesYear.className = 'tile is-child is-12 has-text-centered';
           moviesYear.textContent = "Year: " + data.results[i].year;
         }
         if (data.results[i].runningTimeInMinutes == "" || data.results[i].runningTimeInMinutes == null) {
           console.log(data.results[i].title + " Has Undefined Length!")
         } else {
-          var moviesTime = document.createElement('p');
-          movies.appendChild(moviesTime);          
+          var moviesTime = document.createElement('h5');
+          movies.appendChild(moviesTime);
+          moviesTime.className = 'tile is-child is-12 has-text-centered';
           moviesTime.textContent = "Length: " + data.results[i].runningTimeInMinutes + " Minutes";
         }
         if (data.results[i].principals == "" || data.results[i].principals == null) {
@@ -82,10 +86,11 @@ function getMovies() {
         } else {
           var principals = document.createElement('div');
           movies.appendChild(principals);
-          principals.textContent = "Stars:";
+          principals.className = 'tile is-parent is-12 is-vertical has-text-centered';
           for (var x = 0; x < data.results[i].principals.length; x++) {
-            var principal = document.createElement('p');
+            var principal = document.createElement('h5');
             principals.appendChild(principal);
+            principal.className = 'tile is-child is-12';
             principal.textContent = data.results[i].principals[x].name;
           }
         }
@@ -201,8 +206,8 @@ const search = document.querySelector('#search');
 const searchInput = document.querySelector('#news-input');
 const searchButton = document.querySelector('#news-button');
 const news = document.querySelector('#news');
-// Here it searches local storage to see if there is any news topic stored inside it and if there is not it searches for "Breaking News" by defult.
 var topic = localStorage.getItem('keytopic');
+// Here it searches local storage to see if there is any news topic stored inside it and if there is not it searches for "Breaking News" by defult.
 if (topic == "" || topic == null) {
   localStorage.setItem('keytopic', "Breaking News");
 }
@@ -216,6 +221,7 @@ searchButton.addEventListener('click', function() {
   getNews();
 });
 function getNews() {
+  news.innerHTML = "";
   topic = localStorage.getItem('keytopic');
   fetch("https://free-news.p.rapidapi.com/v1/search?q="+topic+"&lang=en", {
 	  "method": "GET",
@@ -233,20 +239,33 @@ function getNews() {
         var newsItem = document.createElement('div');
         news.appendChild(newsItem);
         newsItem.className = 'tile is-parent is-vertical is-4';
+        var newsImageLink = document.createElement('a');
+        newsItem.appendChild(newsImageLink);
+        newsImageLink.className = 'tile is-parent is-12';
+        newsImageLink.setAttribute('href', data.articles[i].link);
+        newsImageLink.setAttribute('target', '_blank');
         var newsImage = document.createElement('img');
-        newsItem.appendChild(newsImage);
+        newsImageLink.appendChild(newsImage);
         newsImage.className = 'tile is-child is-12';
         newsImage.setAttribute('src', data.articles[i].media);
+        var newsSourceLink = document.createElement('a');
+        newsItem.appendChild(newsSourceLink);
+        newsSourceLink.className = 'tile is-parent is-12';
+        newsSourceLink.setAttribute('href', "https://www." + data.articles[i].clean_url);
+        newsSourceLink.setAttribute('target', '_blank');
         var newsSource = document.createElement('p');
-        newsItem.appendChild(newsSource);
-        newsSource.className = 'tile is-child is-12';
-        newsSource.textContent = data.articles[i].clean_url;
-        var newsText = document.createElement('a');
-        newsItem.appendChild(newsText);
-        newsText.className = 'tile is-child is-12 has-text-justified';
+        newsSourceLink.appendChild(newsSource);
+        newsSource.className = 'tile is-child is-12 has-text-centered has-text-danger-dark is-italic';
+        newsSource.textContent = "Source: " + data.articles[i].clean_url;
+        var newsTextLink = document.createElement('a');
+        newsItem.appendChild(newsTextLink);
+        newsTextLink.className = 'tile is-parent is-12';
+        newsTextLink.setAttribute('href', data.articles[i].link);
+        newsTextLink.setAttribute('target', '_blank');
+        var newsText = document.createElement('p');
+        newsTextLink.appendChild(newsText);
+        newsText.className = 'tile is-child is-12 has-text-justified has-text-black';
         newsText.textContent = data.articles[i].title;
-        newsText.setAttribute('href', data.articles[i].link);
-        newsText.setAttribute('target', '_blank');
       }
     };
   })
@@ -257,12 +276,10 @@ function getNews() {
 
 // Covid-19 stats starts here.
 var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
-var covid = document.createElement('div');
-rightSide.appendChild(covid);
-covid.className = 'tile is-child';
-
+var covid = document.querySelector('#right-side');
+var worldStats = document.querySelector('#world-stats');
+var stateSearch = document.querySelector('#state-search');
 function covidStats() {
-
   fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date=" + yesterday, {
     "method": "GET",
     "headers": {
@@ -270,31 +287,36 @@ function covidStats() {
       "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
     }
   })
+  .then(response => {
+    return response.json();
+  })
 
-    .then(response => {
-      return response.json();
-    })
+  .then(data => {
+    var globalTitle = document.createElement('h3');
+    worldStats.appendChild(globalTitle);
+    globalTitle.className = 'tile is-child is-12 has-text-centered';
+    globalTitle.textContent = "Global Stats";
+    var deathsTitle = document.createElement('h4');
+    worldStats.appendChild(deathsTitle);
+    deathsTitle.className = 'tile is-child is-12 has-text-centered';
+    deathsTitle.textContent = "Deaths:";
+    var deaths = document.createElement('p');
+    worldStats.appendChild(deaths);
+    deaths.className = 'tile is-child is-12 has-text-centered has-text-danger';
+    deaths.textContent = data.data.deaths;
+    var fatalityRateTitle = document.createElement('h4');
+    worldStats.appendChild(fatalityRateTitle);
+    fatalityRateTitle.className = 'tile is-child is-12 has-text-centered';
+    fatalityRateTitle.textContent = "Fatality Rate:";
+    var fatalityRate = document.createElement('p');
+    worldStats.appendChild(fatalityRate);
+    fatalityRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
+    fatalityRate.textContent = data.data.fatality_rate;
+  })
 
-    .then(data => {
-      var deathsTitle = document.createElement('h4');
-      covid.appendChild(deathsTitle);
-      deathsTitle.textContent = "Deaths:  ";
-      var deaths = document.createElement('div')
-      covid.appendChild(deaths);
-      deaths.textContent = data.data.deaths;
-
-      var fatalityRateTitle = document.createElement('h4');
-      covid.appendChild(fatalityRateTitle);
-      fatalityRateTitle.textContent = "Fatality Rate:  ";
-
-      var fatalityRate = document.createElement('div')
-      covid.appendChild(fatalityRate);
-      fatalityRate.textContent = data.data.fatality_rate;
-    })
-
-    .catch(err => {
-      console.error(err);
-    });
+  .catch(err => {
+    console.error(err);
+  });
 };
 
 function searchStates() {
@@ -305,42 +327,44 @@ function searchStates() {
       "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
     }
   })
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      for (var i = 0; i < data.data.length; i++) {
-        var stateListTitle = document.createElement('h4');
-        covid.appendChild(stateListTitle);
-        stateListTitle.textContent = "Region Name:  ";
-
-        var stateList = document.createElement('h4')
-        covid.appendChild(stateList);
-        stateList.id = 'state-list';
-        stateList.textContent = data.data[i].region.province;
-
-        var deathsByStateTitle = document.createElement('h4');
-        covid.appendChild(deathsByStateTitle);
-        deathsByStateTitle.textContent = "Deaths:  ";
-
-        var deathsByState = document.createElement('p')
-        covid.appendChild(deathsByState);
-        deathsByState.className = 'dbs';
-        deathsByState.textContent = data.data[i].deaths;
-
-        var fatalityByStateRateTitle = document.createElement('h4');
-        covid.appendChild(fatalityByStateRateTitle);
-        fatalityByStateRateTitle.textContent = "Fatality Rate:  ";
-
-        var fatalityByStateRate = document.createElement('p')
-        covid.appendChild(fatalityByStateRate);
-        fatalityByStateRate.className = 'dbs';
-        fatalityByStateRate.textContent = data.data[i].fatality_rate;
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    var stateTitle = document.createElement('h3');
+    stateSearch.appendChild(stateTitle);
+    stateTitle.className = 'tile is-child is-12 has-text-centered';
+    stateTitle.textContent = "US Stats by Region";
+    for (var i = 0; i < data.data.length; i++) {
+      var stateListTitle = document.createElement('h4');
+      stateSearch.appendChild(stateListTitle);
+      stateListTitle.className = 'tile is-child is-12 has-text-centered';
+      stateListTitle.textContent = "Region Name:";
+      var stateList = document.createElement('p');
+      stateSearch.appendChild(stateList);
+      stateList.className = 'tile is-child is-12 has-text-centered has-text-link';
+      stateList.textContent = data.data[i].region.province;
+      var deathsByStateTitle = document.createElement('h4');
+      stateSearch.appendChild(deathsByStateTitle);
+      deathsByStateTitle.className = 'tile is-child is-12 has-text-centered';
+      deathsByStateTitle.textContent = "Deaths:";
+      var deathsByState = document.createElement('p');
+      stateSearch.appendChild(deathsByState);
+      deathsByState.className = 'tile is-child is-12 has-text-centered has-text-danger';
+      deathsByState.textContent = data.data[i].deaths;
+      var fatalityByStateRateTitle = document.createElement('h4');
+      stateSearch.appendChild(fatalityByStateRateTitle);
+      fatalityByStateRateTitle.className = 'tile is-child is-12 has-text-centered';
+      fatalityByStateRateTitle.textContent = "Fatality Rate:";
+      var fatalityByStateRate = document.createElement('p');
+      stateSearch.appendChild(fatalityByStateRate);
+      fatalityByStateRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
+      fatalityByStateRate.textContent = data.data[i].fatality_rate;
+    }
+  })
+  .catch(err => {
+    console.error(err);
+  });
 };
 // Covid-19 stats ends here.
 
