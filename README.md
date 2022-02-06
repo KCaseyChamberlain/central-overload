@@ -22,7 +22,7 @@ UHOO would like to help the User simplifly their daily information and place it 
 
 The following image demonstrates the web application's default appearance and functionality:
 
-![Screenshot of Functionality](./assets/sample.jpg)
+![Screenshot of Functionality](./assets/images/functional.jpg)
 
 ## 📝 Live URL
 

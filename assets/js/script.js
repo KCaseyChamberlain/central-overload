@@ -168,6 +168,8 @@ function getWeather(lat, lon) {
     todayUv.textContent = "UV Index: " + data.current.uvi;
     for (var i = 1; i < 8; i++) {
       var dayDateCalc = (data.daily[i].dt - data.daily[0].dt) / 24 / 60 / 60;
+      console.log(data.daily[i].dt - data.daily[0].dt)
+
       var days = document.createElement('div');
       weatherBlock.appendChild(days);
       days.className = 'tile is-parent is-vertical';
