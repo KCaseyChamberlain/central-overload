@@ -132,13 +132,13 @@ h6 {
   font-size: 1rem;
   font-family: 'Bangers', cursive;
 }
-#news-input, #news-button, #movies-input, #movies-button, #country-input, #country-button {
+#news-input, #news-button, #movies-input, #movies-button, #country-input, #country-button, #state-input, #state-button {
   padding: 5px;
   margin: 2px !important;
   font-size: 1rem;
   border-radius: 8px;
 }
-#news-button, #movies-button, #country-button {
+#news-button, #movies-button, #country-button, #state-button {
   font-family: 'Bangers', cursive;
   background-color: var(--primary);
   color: var(--secondary);
@@ -156,7 +156,7 @@ h6 {
   }
 }
 @media screen and (max-width: 768px) {
-  #news-input, #news-button, #movies-input, #movies-button, #country-input, #country-button {
+  #news-input, #news-button, #movies-input, #movies-button, #country-input, #country-button, #state-input, #state-button {
     width: 100%;
   }
 }
