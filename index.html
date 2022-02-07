@@ -20,7 +20,7 @@
   <main id="main" class="tile is-ancestor">
     <div id="left-side" class="tile is-parent is-2 is-vertical box">
       <div id="movies-search" class="tile is-parent is-vertical is-12">
-        <h2 class="tile is-child is-12 has-text-centered">Movie Search</h2>
+        <h2 class="tile is-child is-12 has-text-centered has-text-link">Movie Search</h2>
         <input type="search" name="Search Movies" id="movies-input" class="tile is-child is-12" placeholder="Find Movie You Like!">
         <button id="movies-button" class="tile is-child is-12">Search</button>
       </div>
@@ -35,9 +35,18 @@
       <div id="news" class="tile is-parent is-12 box"></div>
     </div>
     <div id="right-side" class="tile is-parent is-2 is-vertical box">
-      <h2 class="tile is-child is-12 has-text-centered">COVID-19 Stats by Yesterday</h2>
-      <div id="world-stats" class="tile is-parent is-12 is-vertical"></div>
-      <div id="state-search" class="tile is-parent is-12 is-vertical"></div>
+      <h2 class="tile is-child is-12 has-text-centered has-text-link">COVID-19</h2>
+      <div id="world" class="tile is-parent is-12 is-vertical"></div>
+      <div id="search-countries" class="tile is-parent is-12 is-vertical">
+        <input type="search" name="Search Countries" id="country-input" class="tile is-child is-12" placeholder="Search Country Name!">
+        <button id="country-button" class="tile is-child is-12">Search</button>
+        <div id="countries-list" class="tile is-parent is-vertical is-12"></div>
+      </div>
+      <div id="search-states" class="tile is-parent is-12 is-vertical">
+        <input type="search" name="Search States" id="state-input" class="tile is-child is-12" placeholder="Search State Name!">
+        <button id="state-button" class="tile is-child is-12">Search</button>
+        <div id="states-list" class="tile is-parent is-vertical is-12"></div>
+      </div>
     </div>
   </main>
   <footer id="footer">
