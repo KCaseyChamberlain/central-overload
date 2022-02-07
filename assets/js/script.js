@@ -41,11 +41,11 @@ buttonEl.addEventListener('click', function() {
 function getMovies() {
   movieEl.innerHTML = "";
   movieTitle = localStorage.getItem('keymovie');
-  fetch("https://imdb8.p.rapidapi.com/title/find?q=" + movieTitle, {
+  fetch('https://imdb8.p.rapidapi.com/title/find?q=' + movieTitle, {
     method: "GET",
     headers: {
       "x-rapidapi-host": "imdb8.p.rapidapi.com",
-      "x-rapidapi-key": "fcf1d86f53mshed2a791c0ac3101p14b521jsn848124570e2d",
+      "x-rapidapi-key": "12b796900dmsh12b8fa6011f391ep1d4f63jsnff6a49444565",
     },
   })
   .then((response) => {
@@ -168,8 +168,6 @@ function getWeather(lat, lon) {
     todayUv.textContent = "UV Index: " + data.current.uvi;
     for (var i = 1; i < 8; i++) {
       var dayDateCalc = (data.daily[i].dt - data.daily[0].dt) / 24 / 60 / 60;
-      console.log(data.daily[i].dt - data.daily[0].dt)
-
       var days = document.createElement('div');
       weatherBlock.appendChild(days);
       days.className = 'tile is-parent is-vertical';
@@ -276,100 +274,215 @@ function getNews() {
 
 // Covid-19 stats starts here.
 var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+const formatter = new Intl.NumberFormat('en');
+const formatterPercent = new Intl.NumberFormat('en', {
+  style: 'percent'
+});
 var covid = document.querySelector('#right-side');
 var worldStats = document.querySelector('#world-stats');
 var stateSearch = document.querySelector('#state-search');
-function covidStats() {
-  fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date=" + yesterday, {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
-      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
-    }
+// function covidStats() {
+//   fetch("https://covid-19-statistics.p.rapidapi.com/reports/total?date=" + yesterday, {
+//     "method": "GET",
+//     "headers": {
+//       "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+//       "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+//     }
+//   })
+//   .then(response => {
+//     return response.json();
+//   })
+
+//   .then(data => {
+//     var globalTitle = document.createElement('h3');
+//     worldStats.appendChild(globalTitle);
+//     globalTitle.className = 'tile is-child is-12 has-text-centered';
+//     globalTitle.textContent = "Global Stats";
+//     var deathsTitle = document.createElement('h4');
+//     worldStats.appendChild(deathsTitle);
+//     deathsTitle.className = 'tile is-child is-12 has-text-centered';
+//     deathsTitle.textContent = "Deaths:";
+//     var deaths = document.createElement('p');
+//     worldStats.appendChild(deaths);
+//     deaths.className = 'tile is-child is-12 has-text-centered has-text-danger';
+//     deaths.textContent = data.data.deaths;
+//     var fatalityRateTitle = document.createElement('h4');
+//     worldStats.appendChild(fatalityRateTitle);
+//     fatalityRateTitle.className = 'tile is-child is-12 has-text-centered';
+//     fatalityRateTitle.textContent = "Fatality Rate:";
+//     var fatalityRate = document.createElement('p');
+//     worldStats.appendChild(fatalityRate);
+//     fatalityRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
+//     fatalityRate.textContent = data.data.fatality_rate;
+//   })
+
+//   .catch(err => {
+//     console.error(err);
+//   });
+// };
+
+var countryInput = document.querySelector('#country-input');
+var countryButton = document.querySelector('#country-button');
+var countriesList = document.querySelector('#countries-list');
+var countryName = localStorage.getItem('keycountry');
+
+if (countryName == "" || countryName == null) {
+  localStorage.setItem('keycountry', "USA");
+}
+countryButton.addEventListener('click', function() {
+  var countrySearch = countryInput.value;
+  if (countrySearch == "" || countrySearch == null) {
+    countrySearch = localStorage.getItem('keycountry');
+  }
+  localStorage.setItem('keycountry', countrySearch);
+  countryName = localStorage.getItem('keycountry');
+  searchCountries();
+});
+
+function searchCountries() {
+  countriesList.innerHTML = "";
+  countryName = localStorage.getItem('keycountry');
+  fetch('https://covid-193.p.rapidapi.com/statistics?country=' + countryName, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "covid-193.p.rapidapi.com",
+		"x-rapidapi-key": "12b796900dmsh12b8fa6011f391ep1d4f63jsnff6a49444565"
+	}
   })
   .then(response => {
     return response.json();
   })
-
   .then(data => {
-    var globalTitle = document.createElement('h3');
-    worldStats.appendChild(globalTitle);
-    globalTitle.className = 'tile is-child is-12 has-text-centered';
-    globalTitle.textContent = "Global Stats";
-    var deathsTitle = document.createElement('h4');
-    worldStats.appendChild(deathsTitle);
-    deathsTitle.className = 'tile is-child is-12 has-text-centered';
-    deathsTitle.textContent = "Deaths:";
-    var deaths = document.createElement('p');
-    worldStats.appendChild(deaths);
-    deaths.className = 'tile is-child is-12 has-text-centered has-text-danger';
-    deaths.textContent = data.data.deaths;
-    var fatalityRateTitle = document.createElement('h4');
-    worldStats.appendChild(fatalityRateTitle);
-    fatalityRateTitle.className = 'tile is-child is-12 has-text-centered';
-    fatalityRateTitle.textContent = "Fatality Rate:";
-    var fatalityRate = document.createElement('p');
-    worldStats.appendChild(fatalityRate);
-    fatalityRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
-    fatalityRate.textContent = data.data.fatality_rate;
-  })
+    var continentTitle = document.createElement('h3');
+    countriesList.append(continentTitle);
+    continentTitle.className = 'tile is-child is-12 has-text-centered';
+    continentTitle.textContent = "Continent Name:";
+    var continent = document.createElement('h4');
+    countriesList.appendChild(continent);
+    continent.className = 'tile is-child is-12 has-text-centered has-text-info';
+    continent.textContent = data.response[0].continent;
 
+    var countryTitle = document.createElement('h3');
+    countriesList.append(countryTitle);
+    countryTitle.className = 'tile is-child is-12 has-text-centered';
+    countryTitle.textContent = "Country Name:";
+    var country = document.createElement('h4');
+    countriesList.appendChild(country);
+    country.className = 'tile is-child is-12 has-text-centered has-text-info';
+    country.textContent = data.response[0].country;
+
+    var populationTitle = document.createElement('h3');
+    countriesList.append(populationTitle);
+    populationTitle.className = 'tile is-child is-12 has-text-centered';
+    populationTitle.textContent = "Population:";
+    var population = document.createElement('h4');
+    countriesList.appendChild(population);
+    population.className = 'tile is-child is-12 has-text-centered has-text-success';
+    population.textContent = formatter.format(data.response[0].population);
+
+    var casesNewTitle = document.createElement('h3');
+    countriesList.append(casesNewTitle);
+    casesNewTitle.className = 'tile is-child is-12 has-text-centered';
+    casesNewTitle.textContent = "New Cases:";
+    var casesNew = document.createElement('h4');
+    countriesList.appendChild(casesNew);
+    casesNew.className = 'tile is-child is-12 has-text-centered has-text-warning-dark';
+    casesNew.textContent = formatter.format(data.response[0].cases.new);
+
+    var casesActiveTitle = document.createElement('h3');
+    countriesList.append(casesActiveTitle);
+    casesActiveTitle.className = 'tile is-child is-12 has-text-centered';
+    casesActiveTitle.textContent = "Active Cases:";
+    var casesActive = document.createElement('h4');
+    countriesList.appendChild(casesActive);
+    casesActive.className = 'tile is-child is-12 has-text-centered has-text-warning-dark';
+    casesActive.textContent = formatter.format(data.response[0].cases.active);
+
+    var casesTotalTitle = document.createElement('h3');
+    countriesList.append(casesTotalTitle);
+    casesTotalTitle.className = 'tile is-child is-12 has-text-centered';
+    casesTotalTitle.textContent = "Total Cases:";
+    var casesTotal = document.createElement('h4');
+    countriesList.appendChild(casesTotal);
+    casesTotal.className = 'tile is-child is-12 has-text-centered has-text-warning-dark';
+    casesTotal.textContent = formatter.format(data.response[0].cases.total);
+
+    var deathsNewTitle = document.createElement('h3');
+    countriesList.append(deathsNewTitle);
+    deathsNewTitle.className = 'tile is-child is-12 has-text-centered';
+    deathsNewTitle.textContent = "New Deaths:";
+    var deathsNew = document.createElement('h4');
+    countriesList.appendChild(deathsNew);
+    deathsNew.className = 'tile is-child is-12 has-text-centered has-text-danger';
+    deathsNew.textContent = formatter.format(data.response[0].deaths.new);
+
+    var deathsTotalTitle = document.createElement('h3');
+    countriesList.append(deathsTotalTitle);
+    deathsTotalTitle.className = 'tile is-child is-12 has-text-centered';
+    deathsTotalTitle.textContent = "Total Deaths:";
+    var deathsTotal = document.createElement('h4');
+    countriesList.appendChild(deathsTotal);
+    deathsTotal.className = 'tile is-child is-12 has-text-centered has-text-danger';
+    deathsTotal.textContent = formatter.format(data.response[0].deaths.total);
+  })
   .catch(err => {
     console.error(err);
   });
 };
 
-function searchStates() {
-  fetch("https://covid-19-statistics.p.rapidapi.com/reports?iso=USA&region_name=US&date=" + yesterday, {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
-      "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
-    }
-  })
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    var stateTitle = document.createElement('h3');
-    stateSearch.appendChild(stateTitle);
-    stateTitle.className = 'tile is-child is-12 has-text-centered';
-    stateTitle.textContent = "US Stats by Region";
-    for (var i = 0; i < data.data.length; i++) {
-      var stateListTitle = document.createElement('h4');
-      stateSearch.appendChild(stateListTitle);
-      stateListTitle.className = 'tile is-child is-12 has-text-centered';
-      stateListTitle.textContent = "Region Name:";
-      var stateList = document.createElement('p');
-      stateSearch.appendChild(stateList);
-      stateList.className = 'tile is-child is-12 has-text-centered has-text-link';
-      stateList.textContent = data.data[i].region.province;
-      var deathsByStateTitle = document.createElement('h4');
-      stateSearch.appendChild(deathsByStateTitle);
-      deathsByStateTitle.className = 'tile is-child is-12 has-text-centered';
-      deathsByStateTitle.textContent = "Deaths:";
-      var deathsByState = document.createElement('p');
-      stateSearch.appendChild(deathsByState);
-      deathsByState.className = 'tile is-child is-12 has-text-centered has-text-danger';
-      deathsByState.textContent = data.data[i].deaths;
-      var fatalityByStateRateTitle = document.createElement('h4');
-      stateSearch.appendChild(fatalityByStateRateTitle);
-      fatalityByStateRateTitle.className = 'tile is-child is-12 has-text-centered';
-      fatalityByStateRateTitle.textContent = "Fatality Rate:";
-      var fatalityByStateRate = document.createElement('p');
-      stateSearch.appendChild(fatalityByStateRate);
-      fatalityByStateRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
-      fatalityByStateRate.textContent = data.data[i].fatality_rate;
-    }
-  })
-  .catch(err => {
-    console.error(err);
-  });
-};
+
+// function searchStates() {
+//   fetch("https://covid-19-statistics.p.rapidapi.com/reports?iso=USA&region_name=US&date=" + yesterday, {
+//     "method": "GET",
+//     "headers": {
+//       "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+//       "x-rapidapi-key": "3e4fbce55emsh647009860a0e650p167679jsnce67625c67a4"
+//     }
+//   })
+//   .then(response => {
+//     return response.json();
+//   })
+//   .then(data => {
+//     var stateTitle = document.createElement('h3');
+//     stateSearch.appendChild(stateTitle);
+//     stateTitle.className = 'tile is-child is-12 has-text-centered';
+//     stateTitle.textContent = "US Stats by Region";
+//     for (var i = 0; i < data.data.length; i++) {
+//       var stateListTitle = document.createElement('h4');
+//       stateSearch.appendChild(stateListTitle);
+//       stateListTitle.className = 'tile is-child is-12 has-text-centered';
+//       stateListTitle.textContent = "Region Name:";
+//       var stateList = document.createElement('p');
+//       stateSearch.appendChild(stateList);
+//       stateList.className = 'tile is-child is-12 has-text-centered has-text-link';
+//       stateList.textContent = data.data[i].region.province;
+//       var deathsByStateTitle = document.createElement('h4');
+//       stateSearch.appendChild(deathsByStateTitle);
+//       deathsByStateTitle.className = 'tile is-child is-12 has-text-centered';
+//       deathsByStateTitle.textContent = "Deaths:";
+//       var deathsByState = document.createElement('p');
+//       stateSearch.appendChild(deathsByState);
+//       deathsByState.className = 'tile is-child is-12 has-text-centered has-text-danger';
+//       deathsByState.textContent = data.data[i].deaths;
+//       var fatalityByStateRateTitle = document.createElement('h4');
+//       stateSearch.appendChild(fatalityByStateRateTitle);
+//       fatalityByStateRateTitle.className = 'tile is-child is-12 has-text-centered';
+//       fatalityByStateRateTitle.textContent = "Fatality Rate:";
+//       var fatalityByStateRate = document.createElement('p');
+//       stateSearch.appendChild(fatalityByStateRate);
+//       fatalityByStateRate.className = 'tile is-child is-12 has-text-centered has-text-danger';
+//       fatalityByStateRate.textContent = data.data[i].fatality_rate;
+//     }
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
+// };
 // Covid-19 stats ends here.
 
 getMovies();
 user();
 getNews();
-covidStats();
-searchStates();
+// covidStats();
+searchCountries();
+// searchStates();
